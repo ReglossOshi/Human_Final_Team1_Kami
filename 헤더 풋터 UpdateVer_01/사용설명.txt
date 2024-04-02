@@ -1,6 +1,8 @@
 WEB-INF-views-admin-test.jsp
 에 헤더 풋더 적용 방법 넣어놨습니다.
 
+static과 webapp파일에 덮어쓰기 해주세요.
+
 사용방법
 
 1. 헤더 아래에 반드시 풋터가 있어야합니다.
