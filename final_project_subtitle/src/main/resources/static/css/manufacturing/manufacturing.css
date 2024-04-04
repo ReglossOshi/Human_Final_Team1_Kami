@@ -1,0 +1,159 @@
+.modal.show {
+  display: block;
+}
+
+.modal-body .row{
+  display: flex;
+
+}
+
+.modal-body .row .inputDivBox {             /* 검은색선 길이*/
+
+  position: relative;
+  width: 400px;
+  margin-left: 50px;
+  margin-top: 100px;
+  padding-right: 10px;
+}
+
+.modal-body .row .inputBox {                /* 회색선의 길이, 검은색 선보다 11px 작아야함*/
+  font-size: 15px;
+  color: #222222;
+  width: 400px;
+  border: none;
+  border-bottom: solid #aaaaaa 1px;
+  padding-bottom: 10px;
+  position: relative;
+  background: none;
+  z-index: 5;
+}
+
+.modal-body .row .inputBox::placeholder { color: #aaaaaa; }
+.modal-body .row .inputBox:focus { outline: none; }
+
+.modal-body .row .inputSpanTag {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  background-color: #666;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  transition: 0.5s;
+}
+
+.modal-body .row .inputLabelTag {
+  position: absolute;
+  color: #aaa;
+  margin-top: 10px;
+  left: 4%;
+  font-size: 20px;
+  bottom: 8px;
+  transition: all .2s;
+}
+
+.modal-body .row .inputBox:focus ~ label, .inputBox:valid ~ label {
+  font-size: 16px;
+  bottom: 40px;
+  color: #666;
+  font-weight: bold;
+}
+
+.modal-body .row .inputBox:focus ~ span, .inputBox:valid ~ span {
+  width: 100%;
+}
+
+    /* THE END OF THE IMPORTANT STUFF */
+
+    /* Basic Styling */
+
+
+    .containerTable {
+      display: block;
+      text-align: center;
+    }
+
+    @-webkit-keyframes leftRight {
+      0%    { -webkit-transform: translateX(0)}
+      25%   { -webkit-transform: translateX(-10px)}
+      75%   { -webkit-transform: translateX(10px)}
+      100%  { -webkit-transform: translateX(0)}
+    }
+    @keyframes leftRight {
+      0%    { transform: translateX(0)}
+      25%   { transform: translateX(-10px)}
+      75%   { transform: translateX(10px)}
+      100%  { transform: translateX(0)}
+    }
+
+    input[type='file'] {
+      display: block;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    .form__input--file_wrap {
+      margin-top: 20px;
+      margin-left: 50px;
+      display: flex;
+    }
+    .form__label--file {
+      width: 80px;
+      height: 30px;
+      line-height:30px;
+      background: #999;
+      border-radius: 3px;
+      color: #fff;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .form__span--file {
+      padding: 0 5px 0 10px;
+      margin-left: 5px;
+      display: block;
+      width: 315px;
+      min-height: 30px;
+      border: 1px solid #e7e7e7;
+      border-radius: 3px;
+      line-height: 30px;
+      color: #999;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    .inputFullBox{
+
+        margin-left: 15px;
+        border: 1px solid black;
+        border-radius: 5%;
+        width: 45%;
+        height: 90%;
+        padding-bottom: 5%;
+        margin-left: 3%;
+    }
+
+    .inputFullBoxTitle{
+        width:400px;
+        margin-left: 10%;
+        display:flex;
+    }
+    .modalTitle{
+        text-align: center;
+        justify-content: center;
+        margin: 0px auto;
+        padding-top: 5%;
+        font-size: 25px;
+    }
+    .inputFullPhotoBox{
+        width: 45%;
+        height: 572px;
+        border: 1px solid black;
+        border-radius: 5%;
+        margin-left: 3%;
+
+    }

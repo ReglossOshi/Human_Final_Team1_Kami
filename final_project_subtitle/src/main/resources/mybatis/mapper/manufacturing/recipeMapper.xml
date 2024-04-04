@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.manufacturing.recipeMapper">
+    <select id="recipeList" resultType="org.zerock.domain.manufacturing.recipeVO">
+        select a.recipe_name, b.filename
+        from recipe a, filerepository b
+        where a.recipe_id = b.recipe_id
+        order by a.recipe_id
+    </select>
+
+    <insert id = "insertRecipe">
+        INSERT INTO recipe(recipe_id, recipe_name, REGISTRATION_DATE)
+        SELECT recipe_seq.nextval, #{recipe_Name}, sysdate
+        FROM dual
+        WHERE NOT EXISTS (SELECT 1 FROM recipe WHERE recipe_name = #{recipe_Name})
+    </insert>
+
+    <insert id = "insertFile">
+        insert into insertFile
+        values(fileRepository_seq.nextval, #{recipe_id}, #{fileName}, #{filePath})
+    </insert>
+
+
+</mapper>
