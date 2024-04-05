@@ -1,0 +1,120 @@
+================
+Input(인풋) 박스
+
+---------------------------
+<div class = "inputDivBox">
+	<input class = "inputBox" type="text" required>
+	<label class = "inputLabelTag">Name</label>
+	<span class = "inputSpanTag"></span>
+</div>
+---------------------------
+이렇게가 하나의 인풋박스가 됩니다
+
+    <div class = "inputDivBox">
+        <input class = "inputBox recipe_name" type="text" required>
+        <label class = "inputLabelTag">레시피명</label>
+        <span class = "inputSpanTag"></span>
+    </div>
+    <div class = "inputDivBox">
+        <input class = "inputBox recipe_name" type="text" required>
+        <label class = "inputLabelTag">레시피정보</label>
+        <span class = "inputSpanTag"></span>
+    </div>
+    <div class = "inputDivBox">
+        <input class = "inputBox recipe_name" type="text" required>
+        <label class = "inputLabelTag">레시피순번</label>
+        <span class = "inputSpanTag"></span>
+    </div>
+
+---------------------------
+================
+테이블
+
+---------------------------
+    <div class="containerTable">
+    <h1>Responsive Table</h1>
+      <table class="rwd-table">
+        <tbody>
+          <tr>
+            <th>테이블 헤드</th>
+          </tr>
+          <tr>
+            <td>
+              테이블내용
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+---------------------------
+================
+Modal(모달)
+
+---------------------------
+    <!-- Modal 공간 -->
+    <div class="modal fade" id="modalArea" tabindex="-1" data-bs-backdrop = "static" aria-labelledby="modalArea" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>모달 제목</h5>
+                </div>
+	     <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+		모달 내용
+	        </div>
+	    </div>
+                <!-- Modal footer -->
+                <div class="footer">
+                    <div class="float-right" style="text-align: right;">
+                        <!-- 종료 버튼 -->
+                        <!--
+                            btn : [bootstrap] 부트 스트랩 버튼 사용
+                            mr-2 : [bootstrap] margin right를 2만큼
+                            bm-2 : [bootstrap] margin bottom을 2만큼
+                        -->
+                        <button type="button" class="btn mr-2 mb-2" id="closeBtn">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+---------------------------
+================
+페이징
+
+---------------------------
+<div class="pagination__wrapper">
+    <ul class="pagination">
+        <li class="pagelist"><button class="pagebtn prev">&#10094;</button></li><!--이전버튼-->
+        
+        <li class="pagelist">
+            <button class="pagebtn pagenum active">1</button><!--현재 위치-->
+        </li>
+        <li class="pagelist">
+            <button class="pagebtn pagenum">2</button>
+        </li>
+        <li class="pagelist">
+            <button class="pagebtn pagenum">3</button>
+        </li>
+        
+        <li class="pagelist"><button class="pagebtn next" title="next page">&#10095;</button></li><!--다음버튼-->
+    </ul>
+</div>
+---------------------------
+================
+Select(셀렉트)
+
+---------------------------
+<div id="selectbox">
+    <div class="sel sel--black-panther">
+        <select name="select-profession" id="select-profession">
+            <option value="" disabled>==선택하세요==</option>
+            <option value="">후라이드 치킨</option>
+            <option value="">교쵼 허니 콤보 냉동 치킨</option>
+            <option value="">양념 냉동 치킨</option>
+            <option value="">맛있는 닭강정</option>
+            <option value="">우리만의 맛집 치킨</option>
+        </select>
+    </div>
+</div>
