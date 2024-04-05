@@ -4,9 +4,11 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.manufacturing.fileVO;
+import org.zerock.domain.manufacturing.recipeStandardVO;
 import org.zerock.domain.manufacturing.recipeVO;
 import org.zerock.mapper.manufacturing.recipeMapper;
 import org.zerock.mapper.manufacturing.fileMapper;
+import org.zerock.mapper.manufacturing.recipeStandardMapper;
 
 import java.util.List;
 @Log4j
@@ -17,6 +19,9 @@ public class manufacturingServiceImpl implements manufacturingService{
 
     @Autowired
     private fileMapper fileMapper;
+
+    @Autowired
+    private recipeStandardMapper standardMapper;
 
     @Override
     public List<recipeVO> getRecipeList(){
@@ -47,6 +52,11 @@ public class manufacturingServiceImpl implements manufacturingService{
     @Override
     public String selectChickenPhoto(int recipe_Id) {
         return fileMapper.selectChickenPhoto(recipe_Id);
+    }
+
+    @Override
+    public int insertRecipeStandardList(List<recipeStandardVO> recipeStandardList) {
+        return standardMapper.insertRecipeStandardList(recipeStandardList);
     }
 
 

@@ -108,12 +108,17 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    <input type = "text" id ="recipeInsertName" name = "recipeName"></input>
+                                        <div class = "inputDivBox">
+                                            <div class = "inputDivBoxDiv">
+                                                <input class = "inputBox recipe_name" id= "recipeInsertName" type="text" name ="recipeName" required>
+                                                <label class = "inputLabelTag">레시피명</label>
+                                                <span class = "inputSpanTag"></span>
+                                            </div>
+                                        </div>
                                     <input type = "file" name = "file"></input>
                                   </div>
                                   <div class="modal-footer">
-                                      <button class="btn btn-primary" id = "recipeInsertBtn"  onClick='javascript:InsertOnlyRecipe();'>레시피 추가</button>
-                                      <button class="btn btn-primary" data-bs-target="#recipeInsertToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">레시피 수정</button>
+                                      <button class="btn btn-primary" id = "recipeInsertBtn" data-bs-target="#recipeInsertToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" onClick='javascript:InsertOnlyRecipe();'>레시피 추가</button>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   </div>
                                 </div>
@@ -124,13 +129,34 @@
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h5 class="modal-title" id="recipeInsertToggle2Label2">레시피 수정</h5>
+                                    <h5 class="modal-title" id="recipeInsertToggle2Label2">레시피 규격</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    1. 셀렉트 박스(레시피명 선택) --> ajax 처리
-                                    2. 레시피 사진 첨부파일 변경(선택 시 기존 사진 보이고 변경 사진 넣을 수 있게)  --> ajax 셀렉된 레시피의 id를 받아 사진을 가져오기
-                                    3. 첨부파일 넣을 수 있는 공간 --> 얘는 컨트롤러로 처리 -> redirect 할 수 있게
+
+                                    <div class = "standardInputBox">
+                                        <div class = "inputDivBox">
+                                            <div class = "inputDivBoxDiv">
+                                                <input class = "inputBox recipe_name" type="number" name ="recipe_Id" id ="recipe_Id" required>
+                                                <label class = "inputLabelTag">레시피번호</label>
+                                                <span class = "inputSpanTag"></span>
+                                                <input class = "inputBox recipe_name" type="number" name ="material_id" id ="material_id" required>
+                                                <label class = "inputLabelTag">재료번호</label>
+                                                <span class = "inputSpanTag"></span>
+                                                <input class = "inputBox recipe_name" type="number" name ="recipe_Product_Quantity" id ="recipe_Product_Quantity" required>
+                                                <label class = "inputLabelTag">필요수량</label>
+                                                <span class = "inputSpanTag"></span>
+                                                <input class = "inputBox recipe_name" type="text" name ="quantity_Units" id ="quantity_Units" required>
+                                                <label class = "inputLabelTag">단위</label>
+                                                <span class = "inputSpanTag"></span>
+                                                <input class = "inputBox recipe_name" type="text" name ="usePhase" id ="usePhase" required>
+                                                <label class = "inputLabelTag">사용단계</label>
+                                                <span class = "inputSpanTag"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button onclick="sendData()">데이터 전송</button>
+
                                   </div>
                                   <div class="modal-footer">
                                     <button class="btn btn-primary" data-bs-target="#recipeInsertModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
@@ -162,11 +188,47 @@
                 return;
             }
                 else{
-               document.getElementById('form1').submit();
+               $('#recipeInsertToggle2').attr("aria-hidden", "false");
+
             }
         }
 
+    function sendData() {
+        var recipeStandardList = [];
 
+        // 모든 입력 필드를 가져와서 반복문으로 처리
+        $(".inputDivBoxDiv").each(function(index) {
+            var recipe_Id = $(this).find("#recipe_Id").val();
+            var material_Id = $(this).find("#material_Id").val();
+            var recipe_Product_Quantity = $(this).find("#recipe_Product_Quantity").val();
+            var quantity_Units = $(this).find("#quantity_Units").val();
+            var usePhase = $(this).find("#usePhase").val();
+
+            // 입력된 값들을 JSON 형식으로 만들어서 recipeStandardList에 추가
+            var recipeStandard = {
+                "recipe_Id": recipe_Id,
+                "material_Id": material_Id,
+                "recipe_Product_Quantity": recipe_Product_Quantity,
+                "quantity_Units": quantity_Units,
+                "usePhase": usePhase
+            };
+            recipeStandardList.push(recipeStandard);
+        });
+
+        // 만들어진 JSON 데이터를 서버로 전송
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/recipe/rest/recipe-standard",
+            data: JSON.stringify(recipeStandardList),
+            success: function(response) {
+                alert("Data sent successfully!");
+            },
+            error: function(error) {
+                console.error("Error occurred: ", error);
+            }
+        });
+    }
     </script>
 
 

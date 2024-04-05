@@ -3,45 +3,35 @@
 <%@ include file="../includes/header.jsp" %>
 <link href="/resources/css/manufacturing.css" rel="stylesheet" />
 <style>
-.modal.show {
-  display: block;
-}
-
-.modal-body .row {
-  display: flex;
-}
-
-.modal-body .row .inputDivBox {
+#modalArea .inputDivBoxDiv {
   position: relative;
-  width: 400px;
+  width: 300px;
   margin-left: 50px;
   margin-top: 100px;
-  padding-right: 10px;
+  margin-bottom: 100px;
 }
 
-.modal-body .row .inputBox {
+#modalArea .inputDivBox input {
   font-size: 15px;
   color: #222222;
-  width: 400px;
+  width: 300px;
   border: none;
   border-bottom: solid #aaaaaa 1px;
   padding-bottom: 10px;
+  padding-left: 10px;
   position: relative;
   background: none;
   z-index: 5;
 }
 
-.modal-body .row .inputBox::placeholder {
-  color: #aaaaaa;
-}
-.modal-body .row .inputBox:focus {
-  outline: none;
-}
+#modalArea .inputDivBox input::placeholder { color: #aaaaaa; }
+#modalArea .inputDivBox input:focus { outline: none; }
 
-.modal-body .row .inputSpanTag {
+#modalArea .inputDivBox span {
   display: block;
   position: absolute;
   bottom: 0;
+  left: 0%;  /* right로만 바꿔주면 오 - 왼 */
   background-color: #666;
   width: 0;
   height: 2px;
@@ -49,36 +39,26 @@
   transition: 0.5s;
 }
 
-.modal-body .row .inputLabelTag {
+#modalArea .inputDivBox label {
   position: absolute;
   color: #aaa;
-  left: 4%;
+  left: 10px;
   font-size: 20px;
+  bottom: 8px;
   transition: all .2s;
-  bottom: 12px; /* 입력 상자 아래에 고정 */
 }
 
-.modal-body .row .inputBox:focus ~ label,
-.inputBox:valid ~ label {
+#modalArea .inputDivBox input:focus ~ label, #modalArea .inputDivBox input:valid ~ label {
   font-size: 16px;
   bottom: 40px;
   color: #666;
   font-weight: bold;
 }
 
-.modal-body .row .inputBox:focus ~ span,
-.inputBox:valid ~ span {
+#modalArea .inputDivBox input:focus ~ span, #modalArea .inputDivBox input:valid ~ span {
   width: 100%;
 }
 
-.modal-body .row .inputBox:focus ~ .inputLabelTag,
-.modal-body .row .inputBox:not(:placeholder-shown) ~ .inputLabelTag {
-  margin-top: -20px; /* 입력 값 위에 고정 */
-  font-size: 16px;
-  bottom: 40px;
-  color: #666;
-  font-weight: bold;
-}
 
 /* Basic Styling */
 
@@ -184,14 +164,11 @@ input[type='file'] {
     <button class="btn btn-sm btn-info ml-2 mt-2 modalBtn" id="testModal">open?</button>
 
             <div class = "inputDivBox">
-                <input class = "inputBox recipe_name" type="text" required>
-                <label class = "inputLabelTag">레시피명</label>
-                <span class = "inputSpanTag"></span>
-            </div>
-            <div class = "inputDivBox">
-                <input class = "inputBox recipe_name" type="text" required>
-                <label class = "inputLabelTag">레시피명</label>
-                <span class = "inputSpanTag"></span>
+                <div class = "inputDivBoxDiv">
+                    <input class = "inputBox recipe_name" type="text" required>
+                    <label class = "inputLabelTag">레시피명</label>
+                    <span class = "inputSpanTag"></span>
+                </div>
             </div>
 
 
@@ -214,9 +191,11 @@ input[type='file'] {
                             </div>
                         <form action="/recipe/upload" method="post" id="form1" enctype="multipart/form-data" onSubmit="return false">
                             <div class = "inputDivBox">
-                                <input class = "inputBox recipe_name" type="text" name ="recipeName" id ="recipeInsertName" required>
-                                <label class = "inputLabelTag">레시피명</label>
-                                <span class = "inputSpanTag"></span>
+                                <div class = "inputDivBoxDiv">
+                                    <input class = "inputBox recipe_name" type="text" name ="recipeName" id ="recipeInsertName" required>
+                                    <label class = "inputLabelTag">레시피명</label>
+                                    <span class = "inputSpanTag"></span>
+                                </div>
                             </div>
 
                             <div class="form__input--file_wrap">
@@ -250,6 +229,26 @@ input[type='file'] {
             </div>
         </div>
     </div>
+
+    <div class="pagination__wrapper">
+        <ul class="pagination">
+            <li class="pagelist"><button class="pagebtn prev">&#10094;</button></li><!--이전버튼-->
+
+            <li class="pagelist">
+                <button class="pagebtn pagenum active">1</button><!--현재 위치-->
+            </li>
+            <li class="pagelist">
+                <button class="pagebtn pagenum">2</button>
+            </li>
+            <li class="pagelist">
+                <button class="pagebtn pagenum">3</button>
+            </li>
+
+            <li class="pagelist"><button class="pagebtn next" title="next page">&#10095;</button></li><!--다음버튼-->
+        </ul>
+    </div>
+
+
 <%@ include file="../includes/footer.jsp" %>
 <script>
 $(function(){
@@ -277,4 +276,12 @@ $(function(){
   $(this).siblings('.form__span--file').text(fileList);
 
 });
+let  pagenum = document.querySelectorAll('.pagenum');
+pagenum.forEach((target) => target.addEventListener("click", function(){
+    pagenum.forEach((e)=>{
+        e.classList.remove('active');
+    })
+        target.classList.add('active');
+    })
+);
 </script>

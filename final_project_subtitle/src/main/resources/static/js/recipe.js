@@ -27,6 +27,29 @@ var recipeService = (function() {
         });
     }
 
+    function recipeStandardInsert(recipe, callback, error) {
+        console.log("add recipeStandard...............");
+
+        $.ajax({
+            // request처리
+            type : 'post',                                      // form의 method속성 값
+            url : '/recipe/rest/recipe-standard',               // form의 action값
+            data : JSON.stringify(recipe),                      // json으로 string처리하면서 파라미터 전달, json으로 보내야함
+            contentType : "application/json; charset=utf-8",    // content-type지정
+            // response처리
+            success : function(result, status, xhr) {           // call 성공시 오는 처리되는 함수
+                if (callback) {
+                    callback(result);
+                }
+            },
+            error : function(xhr, status, er) {                 // call 실패시 오는 처리되는 함수
+                if (error) {
+                    error(er);
+                }
+            }
+        });
+    }
+
     // 레시피 삭제
     function recipeDelete(recipe_Id, callback, error) {
         $.ajax({
@@ -112,6 +135,7 @@ var recipeService = (function() {
 
     return {
         recipeInsert: recipeInsert,
+        recipeStandardInsert: recipeStandardInsert,
         recipeDelete: recipeDelete,
         recipeUpdate: recipeUpdate,
         recipeInfoGet: recipeInfoGet,

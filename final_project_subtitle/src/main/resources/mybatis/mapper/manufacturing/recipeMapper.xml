@@ -21,5 +21,4 @@
         values(fileRepository_seq.nextval, #{recipe_id}, #{fileName}, #{filePath})
     </insert>
 
-
 </mapper>
