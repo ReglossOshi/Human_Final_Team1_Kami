@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface FinishedGoodsMapper {
     public List<FinishedGoodsVO> getGoodsList();
+    public List<FinishedGoodsVO> getRecipeList();
+    public void goodsInsert(FinishedGoodsVO goods);
 }

@@ -33,6 +33,7 @@
         display:flex;
         justify-content:center;
         margin:10px;
+        margin-bottom:100px;
         height:auto;
     }
 
@@ -52,7 +53,10 @@
         justify-content:space-between;
         align-items:center;
         width:100%;
-        margin-bottom:20px;
+        margin:20px 0;
+        padding:10px;
+        padding-top:30px;
+        border:1px solid rgba(0,0,0,0.18);
     }
 
     .goodsfooter{
@@ -75,13 +79,16 @@
         display:flex;
         justify-content:space-between;
         align-items:center;
-        margin-top:30px;
         width:100%;
     }
     .inputDivBox{
         margin:0;
-        margin-right:20px;
         padding:0;
+    }
+
+    #search-input{
+        width:200px;
+        margin:0 20px;
     }
 
     .select-box{
@@ -117,80 +124,111 @@
     .float-right{
         margin-top:20px;
     }
+
+    #goods-status .sel{
+        width:90px;
+    }
 </style>
 
 <div class="fullpage">
     <div class="section">
         <div>
-            <div class="containerGoods">
-                <div class="containerdiv">
-                    <div class="goodscontents">
-                    <div class="title-name"><h1>제품 관리</h1></div>
-                    <div class="goodstitle">
-                        <div class="select-div">
-                            <div class="select-box">
-                                <div class = "inputDivBox">
-                                    <input class = "inputBox" type="text" required>
-                                    <label class = "inputLabelTag">검색</label>
-                                    <span class = "inputSpanTag"></span>
+            <div class="scroll">
+                <div class="containerGoods">
+                    <div class="containerdiv">
+                        <div class="goodscontents">
+                        <div class="title-name"><h1>제품 관리</h1></div>
+                        <div class="goodstitle">
+                            <div class="select-div">
+                                <div class="select-box">
+                                    <div id="goods-status">
+                                        <div class="sel sel--black-panther">
+                                            <select name="select-profession" id="select-status">
+                                                <option disabled>상태</option>
+                                                <option value="3">전체</option>
+                                                <option value="0">미판매</option>
+                                                <option value="1">판매중</option>
+                                                <option value="2">품절</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div id="search-input" class = "inputDivBox">
+                                        <input class = "inputBox" type="text" required>
+                                        <label class = "inputLabelTag">검색</label>
+                                        <span class = "inputSpanTag"></span>
+                                    </div>
+                                    <button class="btn btn-sm btn-secondary ml-2 mt-2">검색</button>
                                 </div>
-                                <button class="btn btn-sm btn-secondary ml-2 mt-2">검색</button>
-                            </div>
-                            <div class="goods-btn">
-                                <button class="btn btn-sm btn-secondary ml-2 mt-2 modalBtn" id="testModal">추가</button>
+                                <div class="goods-btn">
+                                    <button class="btn btn-sm btn-secondary ml-2 mt-2 modalBtn" id="testModal">추가</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="table-height">
-                                <table class="rwd-table">
-                                            <tbody>
-                                                <tr>
-                                                    <th>번호</th>
-                                                    <th>제품 번호</th>
-                                                    <th>제품 이름</th>
-                                                    <th>제품 수량</th>
-                                                    <th>제품 가격</th>
-                                                    <th>제품 단위</th>
-                                                </tr>
-
-                                                <c:forEach items="${goodslist}" var="goods" varStatus="status">
+                        <div class="table-height">
+                                    <table class="rwd-table">
+                                                <tbody>
                                                     <tr>
-                                                       <td data-th="번호"><c:out value="${status.count}" /></td>
-                                                       <td data-th="제품 번호"><c:out value="${goods.finishedgoods_id}" /></td>
-                                                       <td data-th="제품 이름"><c:out value="${goods.finishedgoods_name}" /></td>
-                                                       <td data-th="제품 수량"><c:out value="${goods.finishedgoods_quantity}" /></td>
-                                                       <td data-th="제품 가격"><c:out value="${goods.finishedgoods_price}" /></td>
-                                                       <td data-th="제품 단위"><c:out value="${goods.quantity_units}" /></td>
+                                                        <th>번호</th>
+                                                        <th>제품 번호</th>
+                                                        <th>제품 이름</th>
+                                                        <th>제품 수량</th>
+                                                        <th>제품 가격</th>
+                                                        <th>제품 단위</th>
+                                                        <th>제품 상태</th>
                                                     </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                    </div>
-                            <div class="goodsfooter">
-                                <div class="pagination__wrapper">
-                                    <ul class="pagination">
-                                        <li class="pagelist"><button class="pagebtn prev">&#10094;</button></li><!--이전버튼-->
-
-                                        <li class="pagelist">
-                                            <button class="pagebtn pagenum active">1</button><!--현재 위치-->
-                                        </li>
-                                        <li class="pagelist">
-                                            <button class="pagebtn pagenum">2</button>
-                                        </li>
-                                        <li class="pagelist">
-                                            <button class="pagebtn pagenum">3</button>
-                                        </li>
-                                        <li class="pagelist">
-                                            <button class="pagebtn pagenum">4</button>
-                                        </li>
-                                        <li class="pagelist">
-                                            <button class="pagebtn pagenum">5</button>
-                                        </li>
-
-                                        <li class="pagelist"><button class="pagebtn next" title="next page">&#10095;</button></li><!--다음버튼-->
-                                    </ul>
+    
+                                                    <c:forEach items="${goodslist}" var="goods" varStatus="status">
+                                                        <tr>
+                                                           <td data-th="번호"><c:out value="${status.count}" /></td>
+                                                           <td data-th="제품 번호"><c:out value="${goods.finishedgoods_id}" /></td>
+                                                           <td data-th="제품 이름"><c:out value="${goods.finishedgoods_name}" /></td>
+                                                           <td data-th="제품 수량"><c:out value="${goods.finishedgoods_quantity}" /></td>
+                                                           <td data-th="제품 가격"><c:out value="${goods.finishedgoods_price}" /></td>
+                                                           <td data-th="제품 단위"><c:out value="${goods.quantity_units}" /></td>
+                                                           <td data-th="제품 상태">
+                                                                <c:choose>
+                                                                    <c:when test="${goods.finishedgoods_status == 0}">
+                                                                        미판매
+                                                                    </c:when>
+                                                                    <c:when test="${goods.finishedgoods_status == 1}">
+                                                                        판매중
+                                                                    </c:when>
+                                                                    <c:when test="${goods.finishedgoods_status == 2}">
+                                                                        품절
+                                                                    </c:when>
+                                                                </c:choose>
+                                                           </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                        </div>
+                                <div class="goodsfooter">
+                                    <div class="pagination__wrapper">
+                                        <ul class="pagination">
+                                            <li class="pagelist"><button class="pagebtn prev">&#10094;</button></li><!--이전버튼-->
+    
+                                            <li class="pagelist">
+                                                <button class="pagebtn pagenum active">1</button><!--현재 위치-->
+                                            </li>
+                                            <li class="pagelist">
+                                                <button class="pagebtn pagenum">2</button>
+                                            </li>
+                                            <li class="pagelist">
+                                                <button class="pagebtn pagenum">3</button>
+                                            </li>
+                                            <li class="pagelist">
+                                                <button class="pagebtn pagenum">4</button>
+                                            </li>
+                                            <li class="pagelist">
+                                                <button class="pagebtn pagenum">5</button>
+                                            </li>
+    
+                                            <li class="pagelist"><button class="pagebtn next" title="next page">&#10095;</button></li><!--다음버튼-->
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -224,22 +262,20 @@
                                 <div class="modal-input">
                                     <div id="selectbox">
                                         <div class="sel sel--black-panther">
-                                            <select name="select-profession" id="select-profession">
-                                                <option value="" disabled>제품 이름</option>
-                                                <option value="">후라이드 치킨</option>
-                                                <option value="">교쵼 허니 콤보 냉동 치킨</option>
-                                                <option value="">양념 냉동 치킨</option>
-                                                <option value="">맛있는 닭강정</option>
-                                                <option value="">우리만의 맛집 치킨</option>
+                                            <select name="select-profession" id="goods-insert">
+                                                <option value="1" disabled selected>제품 이름</option>
+                                                <c:forEach items="${recipelist}" var="recipe">
+                                                    <option><c:out value="${recipe.finishedgoods_name}" /></option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-input">
                                     <div class = "inputDivBox">
-                                        <input class = "inputBox" type="text" required>
+                                        <input class = "inputBox" type="text" id="goods-price" required>
                                         <label class = "inputLabelTag">제품 가격</label>
-                                        <span class = "inputSpanTag"></span>
+                                        <span class = "inputSpanTag" id="inputtext"></span>
                                     </div>
                                 </div>
                                 <div class="modal-input">
@@ -247,8 +283,6 @@
                                 </div>
                             </div>
                             <div class="modal-input-box">
-
-
 
                             </div>
                         </div>
@@ -269,8 +303,10 @@
 
 
 
-<script src="/resources/js/default/fullpage/jquery.fullpage.js"></script>
 
+
+<script src="/resources/js/default/fullpage/jquery.fullpage.js"></script>
+<script src="/resources/js/default/fullpage/scrolloverflow.js"></script>
 
 
 <script>
@@ -284,8 +320,33 @@ window.addEventListener("resize", function() {
 });
 
 
+var checkindex = document.querySelectorAll('.modal-input .sel__box__options');
+var modalindex;
+checkindex.forEach((target, index) => target.addEventListener('click',function(){
+    modalindex=index;
+}));
+
+const goodsInsert = document.getElementById('goods-insert-btn');
+
+goodsInsert.addEventListener('click', function(){
+    var goodsPrice = document.getElementById('goods-price');
+    const goodsInsert = document.getElementById('goods-insert');
+    var option = goodsInsert.options[goodsInsert.selectedIndex];
+    if(modalindex==null){
+        modalindex=0;
+    }
+    document.querySelectorAll('.modal-input .sel__box__options')[modalindex].classList.remove('selected');
+    document.querySelectorAll('.modal-input .sel__placeholder')[0].textContent="제품 이름";
+
+
+    goodsInsert.options[0].selected = true;
+    goodsPrice.value=null;
+});
+
 $(function() {
     var page = $('.fullpage').fullpage({
+        menu:'.sb-topnav',
+        anchors: ['firstPage', 'secondPage', '3rdPage'],
 
         // 1. 네비게이션 보이기
         navigation : true,
@@ -294,7 +355,14 @@ $(function() {
         navigationPosition : 'right',
 
         // 3. 각 섹션의 배경색상 지정 (6자의 핵사코드 작성가능)
-        sectionsColor : ['#E5DDC5', 'white', 'white'],
+        sectionsColor : ['#E5DDC5', 'pink', 'gray'],
+
+
+
+        // 스크롤 허용을 원하는 요소의 클래스
+        scrollOverflow: true,
+        scrollOverflowReset: true,
+
     });
 });
 </script>

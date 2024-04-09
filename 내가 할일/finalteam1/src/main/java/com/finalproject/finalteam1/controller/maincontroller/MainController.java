@@ -23,14 +23,18 @@ public class MainController {
 
     @GetMapping("/test")
     public String test(Model model) {
-        List<FinishedGoodsVO> goodslist =service.insertGoods();
+        List<FinishedGoodsVO> goodslist =service.selectGoods();
+        List<FinishedGoodsVO> recipelist =service.selectRecipe();
         model.addAttribute("goodslist",goodslist);
+        model.addAttribute("recipelist",recipelist);
         return "/admin/test";
     }
 
+
+
     @GetMapping("/test2")
     public String test2(Model model) {
-        List<FinishedGoodsVO> goodslist =service.insertGoods();
+        List<FinishedGoodsVO> goodslist =service.selectGoods();
         model.addAttribute("goodslist",goodslist);
         return "/admin/test2";
     }

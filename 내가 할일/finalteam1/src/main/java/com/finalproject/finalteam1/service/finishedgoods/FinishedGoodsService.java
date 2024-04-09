@@ -5,5 +5,7 @@ import com.finalproject.finalteam1.domain.finishedgoods.FinishedGoodsVO;
 import java.util.List;
 
 public interface FinishedGoodsService {
-    public List<FinishedGoodsVO> insertGoods();
+    public List<FinishedGoodsVO> selectGoods();
+
+    public List<FinishedGoodsVO> selectRecipe();
 }

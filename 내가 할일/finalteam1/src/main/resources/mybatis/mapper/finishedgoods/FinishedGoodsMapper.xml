@@ -4,7 +4,27 @@
 <mapper namespace="com.finalproject.finalteam1.mapper.finishedgoods.FinishedGoodsMapper">
     <select id="getGoodsList" resultType="com.finalproject.finalteam1.domain.finishedgoods.FinishedGoodsVO">
         SELECT /*+ INDEX_ASC(FINISHEDGOODS SYS_C0012608)*/*
-        FROM FINISHEDGOODS
+        FROM FINISHEDGOODS WHERE FINISHEDGOODS_NAME LIKE '%'||''||'%'
+        <if test="finishedgoods_status == 0">
+            OR FINISHEDGOODS_STATUS=0
+        </if>
+        <if test="finishedgoods_status == 1">
+            OR FINISHEDGOODS_STATUS=1
+        </if>
+        <if test="finishedgoods_status == 2">
+            OR FINISHEDGOODS_STATUS=2
+        </if>
     </select>
 
+    <select id="getRecipeList" resultType="com.finalproject.finalteam1.domain.finishedgoods.FinishedGoodsVO">
+        SELECT /*+ INDEX_ASC(FINISHEDGOODS SYS_C0012608)*/FINISHEDGOODS_NAME
+        FROM FINISHEDGOODS
+        WHERE FINISHEDGOODS_STATUS=0
+    </select>
+
+    <update id="goodsInsert">
+        UPDATE FINISHEDGOODS
+        SET FINISHEDGOODS_STATUS = 1, FINISHEDGOODS_PRICE = #{finishedgoods_price}
+        WHERE FINISHEDGOODS_NAME = #{finishedgoods_name}
+    </update>
 </mapper>

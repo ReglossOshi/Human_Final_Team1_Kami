@@ -9,4 +9,5 @@ public class FinishedGoodsVO {
     private int finishedgoods_quantity; //완제품 총 수량
     private int finishedgoods_price;    //완제품 가격
     private String quantity_units;      //완제품 단위
+    private int finishedgoods_status;   //완제품 상태(0=미판매 1=판매중 2=품절)
 }
