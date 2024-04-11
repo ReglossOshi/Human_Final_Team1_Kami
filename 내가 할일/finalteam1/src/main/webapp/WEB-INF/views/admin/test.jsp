@@ -133,11 +133,12 @@
 <div class="fullpage">
     <div class="section">
         <div>
-            <div class="scroll">
+            <div class="scroll"> <!-- 섹션 구간에 스크롤 지정 -->
                 <div class="containerGoods">
                     <div class="containerdiv">
                         <div class="goodscontents">
-                        <div class="title-name"><h1>제품 관리</h1></div>
+                        <div class="title-name"><h1>제품 관리</h1></div> <!-- 제목 -->
+<!-- 검색 및 추가하는 상단 구간 -->
                         <div class="goodstitle">
                             <div class="select-div">
                                 <div class="select-box">
@@ -164,8 +165,9 @@
                                 </div>
                             </div>
                         </div>
+<!-- 테이블 영역 -->
                         <div class="table-height">
-                                    <table class="rwd-table">
+                                    <table id="goods-table" class="rwd-table">
                                                 <tbody>
                                                     <tr>
                                                         <th>번호</th>
@@ -185,24 +187,13 @@
                                                            <td data-th="제품 수량"><c:out value="${goods.finishedgoods_quantity}" /></td>
                                                            <td data-th="제품 가격"><c:out value="${goods.finishedgoods_price}" /></td>
                                                            <td data-th="제품 단위"><c:out value="${goods.quantity_units}" /></td>
-                                                           <td data-th="제품 상태">
-                                                                <c:choose>
-                                                                    <c:when test="${goods.finishedgoods_status == 0}">
-                                                                        미판매
-                                                                    </c:when>
-                                                                    <c:when test="${goods.finishedgoods_status == 1}">
-                                                                        판매중
-                                                                    </c:when>
-                                                                    <c:when test="${goods.finishedgoods_status == 2}">
-                                                                        품절
-                                                                    </c:when>
-                                                                </c:choose>
-                                                           </td>
+                                                           <td data-th="제품 상태"><c:choose><c:when test="${goods.finishedgoods_status == 0}">미판매</c:when><c:when test="${goods.finishedgoods_status == 1}">판매중</c:when><c:when test="${goods.finishedgoods_status == 2}">품절</c:when></c:choose></td>
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>
                                             </table>
                         </div>
+<!-- 페이징 보여지는 구간 -->
                                 <div class="goodsfooter">
                                     <div class="pagination__wrapper">
                                         <ul class="pagination">
@@ -234,11 +225,13 @@
             </div>
         </div>
     </div>
+<!-- 2번째 섹션 -->
     <div class="section">
         <div>
 
         </div>
     </div>
+<!-- 3번째 섹션  -->
     <div class="section">
         <div>
             컨텐츠 작성
@@ -246,7 +239,7 @@
     </div>
 </div>
 
-<!-- Modal 공간 -->
+<!-- 추가 버튼 누를 시 나오는 모달 -->
 <div class="modal fade" id="modalArea" tabindex="-1" data-bs-backdrop = "static" aria-labelledby="modalArea" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -299,7 +292,29 @@
     </div>
 </div>
 
+<!-- 테이블 선택 시 나오는 모달 -->
+<div class="modal fade" id="goods-row-modal" tabindex="-1" data-bs-backdrop = "static" aria-labelledby="modalArea" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>모달 제목</h5>
+            </div>
+     <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row">
+    모달 내용
+        </div>
+    </div>
+            <!-- Modal footer -->
+            <div class="footer">
+                <div class="float-right" style="text-align: right;">
 
+                    <button type="button" class="btn mr-2 mb-2" id="goodsCloseBtn">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -310,7 +325,9 @@
 
 
 <script>
-document.title="완제품 관리";
+document.title="완제품 관리"; //화면 위에 title 이름 변경
+
+//특정 구간을 넘으면 검색 바 사라지는 로직
 window.addEventListener("resize", function() {
     if(document.getElementsByClassName('containerdiv')[0].getBoundingClientRect().width<463){
         document.getElementsByClassName('goodstitle')[0].style.display="none";
@@ -320,6 +337,8 @@ window.addEventListener("resize", function() {
 });
 
 
+
+//모달 안에 select의 인덱스 값 가져오기
 var checkindex = document.querySelectorAll('.modal-input .sel__box__options');
 var modalindex;
 checkindex.forEach((target, index) => target.addEventListener('click',function(){
@@ -328,6 +347,8 @@ checkindex.forEach((target, index) => target.addEventListener('click',function()
 
 const goodsInsert = document.getElementById('goods-insert-btn');
 
+
+// 추가 선택 시 선택 되어 있는 값들 초기화
 goodsInsert.addEventListener('click', function(){
     var goodsPrice = document.getElementById('goods-price');
     const goodsInsert = document.getElementById('goods-insert');
@@ -348,23 +369,93 @@ $(function() {
         menu:'.sb-topnav',
         anchors: ['firstPage', 'secondPage', '3rdPage'],
 
-        // 1. 네비게이션 보이기
+        // 1. 네비게이션 보이기 옆에 생기는 선택 버튼 허용
         navigation : true,
 
-        // 2. 네비게이션 위치 지정
+        // 2. 네비게이션 위치 지정 옆에 생기는 선택 버튼
         navigationPosition : 'right',
 
         // 3. 각 섹션의 배경색상 지정 (6자의 핵사코드 작성가능)
         sectionsColor : ['#E5DDC5', 'pink', 'gray'],
 
-
-
         // 스크롤 허용을 원하는 요소의 클래스
-        scrollOverflow: true,
-        scrollOverflowReset: true,
+        scrollOverflow: true, //섹션 내용이 커지면 저절로 섹션 구간에 스크롤 생김
 
     });
 });
+
+
+//테이블 행 클릭 시 동작하는 구간
+function rowClicked() {
+    var table = document.getElementById('goods-table');
+    var rowList = table.rows;
+
+    for(i=1;i<rowList.length;i++){
+        var row = rowList[i];
+        var tdsNum = row.childElementCount;
+
+        row.onclick = function(){
+            return function(){
+                goodsModal();
+            };
+        }(row);
+    }
+}
+window.onload = rowClicked();
+
+//테이블 행 클릭 시 화면에 나오는 모달
+function goodsModal(){
+    $('#goods-row-modal').modal('show');
+}
+//테이블 행 클릭 시 나온 모달 닫는 버튼
+$(function(){
+    // 모달 종료 (hide)
+    $(document).on('click', '#goodsCloseBtn', function(){
+        $('#goods-row-modal').modal('hide');
+    });
+})
+
+
+
+// Ajax 값 넣는 부분
+var goodsService = (function() {
+    //제품 추가
+    function update(goodsplus,callback,error){
+        $.ajax({
+            type:'put',
+            url:'/replies/'+reply.rno,
+            data:JSON.stringify(reply),
+            contentType:"application/json; charset=utf-8",
+            success:function(result,status,xhr){
+                if(callback){
+                    callback(result);
+                }
+            },
+            error:function(xhr,status,er){
+                if(error){
+                    error(er);
+                }
+            }
+        });
+    }
+
+    return {
+        update: update
+    };
+})();
+
+function goodsStatusChange(){
+    goodsService.update(
+        {
+            rno:rno,
+            bno:bnoValue,
+            reply:text1
+        }, function(result){
+            alert("수정 완료");
+        }
+    );
+}
+
 </script>
 
 <%@ include file="../includes/footer.jsp" %>

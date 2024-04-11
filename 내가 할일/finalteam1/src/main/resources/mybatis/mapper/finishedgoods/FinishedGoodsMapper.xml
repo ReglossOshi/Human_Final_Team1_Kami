@@ -3,16 +3,51 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.finalproject.finalteam1.mapper.finishedgoods.FinishedGoodsMapper">
     <select id="getGoodsList" resultType="com.finalproject.finalteam1.domain.finishedgoods.FinishedGoodsVO">
-        SELECT /*+ INDEX_ASC(FINISHEDGOODS SYS_C0012608)*/*
-        FROM FINISHEDGOODS WHERE FINISHEDGOODS_NAME LIKE '%'||''||'%'
-        <if test="finishedgoods_status == 0">
-            OR FINISHEDGOODS_STATUS=0
+        SELECT
+        rownum,
+        FINISHEDGOODS_ID,
+        FINISHEDGOODS_NAME,
+        FINISHEDGOODS_QUANTITY,
+        FINISHEDGOODS_PRICE,
+        QUANTITY_UNITS,
+        FINISHEDGOODS_STATUS
+        FROM
+        (SELECT /*+ INDEX_ASC(FINISHEDGOODS SYS_C0012608)*/ rownum rn,
+        FINISHEDGOODS_ID,
+        FINISHEDGOODS_NAME,
+        FINISHEDGOODS_QUANTITY,
+        FINISHEDGOODS_PRICE,
+        QUANTITY_UNITS,
+        FINISHEDGOODS_STATUS
+        FROM FINISHEDGOODS
+        WHERE FINISHEDGOODS_NAME LIKE '%'||#{goods.finishedgoods_name}||'%'
+        <if test="goods.finishedgoods_status == 0">
+            AND FINISHEDGOODS_STATUS=0
         </if>
-        <if test="finishedgoods_status == 1">
-            OR FINISHEDGOODS_STATUS=1
+        <if test="goods.finishedgoods_status == 1">
+            AND FINISHEDGOODS_STATUS=1
         </if>
-        <if test="finishedgoods_status == 2">
-            OR FINISHEDGOODS_STATUS=2
+        <if test="goods.finishedgoods_status == 2">
+            AND FINISHEDGOODS_STATUS=2
+        </if>
+        <![CDATA[
+            AND rownum <= #{paging.pageNum}*#{paging.pageSize})
+            WHERE rn > (#{paging.pageNum}-1)*#{paging.pageSize}
+        ]]>
+    </select>
+
+    <select id="maxpageCount" resultType="integer">
+        SELECT count(*)
+        FROM FINISHEDGOODS
+        WHERE FINISHEDGOODS_NAME LIKE '%'||#{goods.finishedgoods_name}||'%'
+        <if test="goods.finishedgoods_status == 0">
+            AND FINISHEDGOODS_STATUS=0
+        </if>
+        <if test="goods.finishedgoods_status == 1">
+            AND FINISHEDGOODS_STATUS=1
+        </if>
+        <if test="goods.finishedgoods_status == 2">
+            AND FINISHEDGOODS_STATUS=2
         </if>
     </select>
 

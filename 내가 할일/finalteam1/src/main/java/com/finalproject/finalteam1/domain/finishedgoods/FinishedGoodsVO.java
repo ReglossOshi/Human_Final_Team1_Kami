@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class FinishedGoodsVO {
+    private int rownum;
     private int finishedgoods_id;       //완제품 번호
     private String finishedgoods_name;  //완제품 이름
     private int finishedgoods_quantity; //완제품 총 수량

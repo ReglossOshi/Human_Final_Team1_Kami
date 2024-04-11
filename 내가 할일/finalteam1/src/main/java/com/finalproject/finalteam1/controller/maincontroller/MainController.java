@@ -23,9 +23,9 @@ public class MainController {
 
     @GetMapping("/test")
     public String test(Model model) {
-        List<FinishedGoodsVO> goodslist =service.selectGoods();
+//        List<FinishedGoodsVO> goodslist =service.selectGoods();
         List<FinishedGoodsVO> recipelist =service.selectRecipe();
-        model.addAttribute("goodslist",goodslist);
+//        model.addAttribute("goodslist",goodslist);
         model.addAttribute("recipelist",recipelist);
         return "/admin/test";
     }
@@ -34,8 +34,8 @@ public class MainController {
 
     @GetMapping("/test2")
     public String test2(Model model) {
-        List<FinishedGoodsVO> goodslist =service.selectGoods();
-        model.addAttribute("goodslist",goodslist);
+//        List<FinishedGoodsVO> goodslist =service.selectGoods();
+//        model.addAttribute("goodslist",goodslist);
         return "/admin/test2";
     }
 }
