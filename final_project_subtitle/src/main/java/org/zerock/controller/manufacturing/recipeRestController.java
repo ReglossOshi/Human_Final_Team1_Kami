@@ -2,13 +2,12 @@ package org.zerock.controller.manufacturing;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.zerock.domain.manufacturing.recipeStandardVO;
-import org.zerock.service.manufacturing.manufacturingService;
+import org.zerock.service.manufacturing.manufacturingRecipeService;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
 @Log4j
 @AllArgsConstructor
 public class recipeRestController {
-    private manufacturingService service;
+    private manufacturingRecipeService service;
 
 
     @PostMapping(value = "/getPhoto", produces = { MediaType.APPLICATION_JSON_VALUE })

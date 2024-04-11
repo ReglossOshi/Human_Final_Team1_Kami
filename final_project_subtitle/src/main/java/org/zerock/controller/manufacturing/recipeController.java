@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.manufacturing.fileVO;
 import org.zerock.domain.manufacturing.recipeVO;
-import org.zerock.service.manufacturing.manufacturingService;
+import org.zerock.service.manufacturing.manufacturingRecipeService;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -24,10 +24,10 @@ import java.util.List;
 @RequestMapping("/recipe")
 @AllArgsConstructor
 public class recipeController {
-    private manufacturingService manufacturingService;
+    private manufacturingRecipeService manufacturingRecipeService;
     @GetMapping
     public String index(Model model) {
-        List<recipeVO> recipeVOList = manufacturingService.getRecipeList();
+        List<recipeVO> recipeVOList = manufacturingRecipeService.getRecipeList();
         model.addAttribute("recipeVOList", recipeVOList);
         log.info("레시피리스트" + recipeVOList);
         return "recipe/recipe";
@@ -62,11 +62,11 @@ public class recipeController {
                 log.info("파일정보........." + fileVO);
                 log.info("레시피정보.........."+recipe);
                 // DB에 레시피 및 파일 정보 저장
-                boolean result = manufacturingService.insertRecipeAndFile(recipe, fileVO);
+                boolean result = manufacturingRecipeService.insertRecipeAndFile(recipe, fileVO);
             }else{
                 recipeVO recipe = new recipeVO();
                 recipe.setRecipe_Name(recipeName);
-                manufacturingService.insertRecipe(recipe);
+                manufacturingRecipeService.insertRecipe(recipe);
             }
 
 

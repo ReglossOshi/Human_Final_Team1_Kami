@@ -6,7 +6,7 @@ import org.zerock.domain.manufacturing.recipeVO;
 
 import java.util.List;
 
-public interface manufacturingService {
+public interface manufacturingRecipeService {
     public List<recipeVO> getRecipeList();
 
     public boolean insertRecipeAndFile(recipeVO vo, fileVO file);

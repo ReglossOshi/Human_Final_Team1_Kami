@@ -13,7 +13,7 @@ import org.zerock.mapper.manufacturing.recipeStandardMapper;
 import java.util.List;
 @Log4j
 @Service
-public class manufacturingServiceImpl implements manufacturingService{
+public class manufacturingRecipeServiceImpl implements manufacturingRecipeService {
     @Autowired
     private recipeMapper mapper;
 
