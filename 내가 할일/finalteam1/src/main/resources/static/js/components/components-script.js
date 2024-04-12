@@ -12,9 +12,12 @@ $(function(){
         $('#modalArea').modal('hide');
     });
 });
+var test = 0;
 //paging
 let  pagenum = document.querySelectorAll('.pagenum');
 pagenum.forEach((target) => target.addEventListener("click", function(){
+    test++;
+    console.log(test);
     pagenum.forEach((e)=>{
         e.classList.remove('active');
     })

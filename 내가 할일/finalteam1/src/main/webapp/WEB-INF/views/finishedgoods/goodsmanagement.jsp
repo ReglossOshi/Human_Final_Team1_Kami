@@ -44,7 +44,7 @@
         width:100%;
     }
 
-    .title-name, .modal-header, #closeBtn{
+    .title-name, .modal-header, .float-right{
         font-family: 'PuradakGentleGothicR';
     }
 
@@ -139,6 +139,13 @@
 
     #goods-status .sel{
         width:90px;
+    }
+
+    #goods-table{
+        user-select:none;
+    }
+    #goods-table td{
+        cursor:pointer;
     }
 </style>
 
@@ -444,12 +451,23 @@ function createPage(search,status,pageNum){
             } else{
                 prevInt=(pageNum-1);
             }
+            var currentPageSize = 5;
+            var currentPageList = Math.ceil(pageNum/currentPageSize);
+            var currentMaxPage = currentPageList*currentPageSize;
+
+            var currentMaxPageReal;
+
+            if(currentMaxPage>=list){
+                currentMaxPageReal=list;
+            }
+            var currentMinPage = currentMaxPage-(currentPageSize-1);
+
             str2+="<li class='pagelist'><button class='pagebtn prev' onclick='showGoodsList("+prevInt+")'>&#10094;</button></li>";
-            for(var i=0, len= list || 0; i < len; i++) {
-                if((i+1)==pageNum){
-                    str2+="<li class='pagelist'><button class='pagebtn pagenum active' onclick='showGoodsList("+(i+1)+")'>"+(i+1)+"</button></li>";
+            for(var i=currentMinPage; i <= currentMaxPageReal; i++) {
+                if(i==pageNum){
+                    str2+="<li class='pagelist'><button class='pagebtn pagenum active' onclick='showGoodsList("+i+")'>"+i+"</button></li>";
                 } else {
-                    str2+="<li class='pagelist'><button class='pagebtn pagenum' onclick='showGoodsList("+(i+1)+")'>"+(i+1)+"</button></li>";
+                    str2+="<li class='pagelist'><button class='pagebtn pagenum' onclick='showGoodsList("+i+")'>"+i+"</button></li>";
                 }
             }
             var nextInt;

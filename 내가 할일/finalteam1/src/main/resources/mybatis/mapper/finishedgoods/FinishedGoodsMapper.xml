@@ -4,7 +4,7 @@
 <mapper namespace="com.finalproject.finalteam1.mapper.finishedgoods.FinishedGoodsMapper">
     <select id="getGoodsList" resultType="com.finalproject.finalteam1.domain.finishedgoods.FinishedGoodsVO">
         SELECT
-        rownum,
+        rn,
         FINISHEDGOODS_ID,
         FINISHEDGOODS_NAME,
         FINISHEDGOODS_QUANTITY,
