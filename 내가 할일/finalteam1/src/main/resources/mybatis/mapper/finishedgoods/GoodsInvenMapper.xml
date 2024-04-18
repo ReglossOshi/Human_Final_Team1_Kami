@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalproject.finalteam1.mapper.finishedgoods.GoodsInvenMapper">
+    <select id="readyGoods" resultType="com.finalproject.finalteam1.domain.finishedgoods.FinishedGoodsVO">
+        SELECT FINISHEDGOODS_ID, FINISHEDGOODS_NAME
+        FROM FINISHEDGOODS
+        WHERE FINISHEDGOODS_STATUS=1
+    </select>
+
+    <select id="invenModalTable" resultType="com.finalproject.finalteam1.domain.finishedgoods.GoodsInvenVO">
+        SELECT
+            FINISHEDGOODSINVENTORY_STORAGE,
+            (SELECT STORAGE_NAME
+            FROM FINISHEDGOODSSTORAGE s
+            WHERE s.STORAGE_ID =i.FINISHEDGOODSINVENTORY_STORAGE) as storage_name,
+            SUM(FINISHEDGOODSINVENTORY_QUANTITY) as finishedgoodsinventory_quantity
+        FROM
+            FINISHEDGOODSINVENTORY i
+        WHERE
+            FINISHEDGOODSINVENTORY_DIVISION = '입고'
+            <if test="inven.finishedgoodsinventory_goods_id != 0">
+                AND FINISHEDGOODSINVENTORY_GOODS_ID = #{inven.finishedgoodsinventory_goods_id}
+            </if>
+
+        GROUP BY
+            FINISHEDGOODSINVENTORY_STORAGE, FINISHEDGOODSINVENTORY_GOODS_ID
+        ORDER BY
+            FINISHEDGOODSINVENTORY_STORAGE
+        OFFSET (1-1)*3 ROWS FETCH NEXT 3 ROW ONLY
+    </select>
+</mapper>
