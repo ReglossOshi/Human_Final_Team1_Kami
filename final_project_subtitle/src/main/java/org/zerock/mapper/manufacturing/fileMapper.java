@@ -5,4 +5,7 @@ import org.zerock.domain.manufacturing.fileVO;
 public interface fileMapper {
     int insertFile(fileVO file);
     String selectChickenPhoto(int recipe_Id);
+
+    int updateFileRecipe(int recipe_Id,
+                         String fileName);
 }

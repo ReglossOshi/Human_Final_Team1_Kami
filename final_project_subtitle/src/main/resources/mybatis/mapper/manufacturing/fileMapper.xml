@@ -16,6 +16,15 @@
         select fileName from filerepository where recipe_id = #{recipe_Id}
     </select>
 
+    <update id = "updateFileRecipe">
+        UPDATE filerepository
+        SET
+            FILENAME = #{fileName}
+        WHERE
+            RECIPE_ID = #{recipe_Id}
+    </update>
+
+
 
 
 </mapper>

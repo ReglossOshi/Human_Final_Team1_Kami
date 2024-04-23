@@ -40,7 +40,7 @@
                     </a>
                     <div class="collapse" id="collapseSales" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">완제품 관리</a>
+                            <a class="nav-link" href="/finishedgoods/goodsmanagement">완제품 관리</a>
                             <a class="nav-link" href="">판매업체 관리</a>
                         </nav>
                     </div>

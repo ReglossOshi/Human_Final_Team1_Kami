@@ -9,5 +9,9 @@ public interface recipeMapper {
 
     int insertRecipe(recipeVO recipe);
 
+    recipeVO selectAllRecipeInfoForUpdate(int recipe_Id);
 
+    int updateRecipe(int recipe_Id,
+                     String recipe_Name);
+    int deleteRecipe(int recipe_Id);
 }

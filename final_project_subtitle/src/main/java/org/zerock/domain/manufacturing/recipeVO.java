@@ -15,4 +15,5 @@ public class recipeVO {
     public Date modify_Date;
     public MultipartFile file;
     public String filename;
+
 }

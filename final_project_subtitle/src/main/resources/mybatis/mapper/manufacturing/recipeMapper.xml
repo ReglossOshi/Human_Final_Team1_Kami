@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.manufacturing.recipeMapper">
     <select id="recipeList" resultType="org.zerock.domain.manufacturing.recipeVO">
-        select a.recipe_name, b.filename
+        select a.recipe_name, b.filename, a.recipe_id
         from recipe a, filerepository b
         where a.recipe_id = b.recipe_id
         order by a.recipe_id
@@ -20,5 +20,31 @@
         insert into insertFile
         values(fileRepository_seq.nextval, #{recipe_id}, #{fileName}, #{filePath})
     </insert>
+
+    <select id="selectAllRecipeInfoForUpdate" resultType="org.zerock.domain.manufacturing.recipeVO">
+        select
+           a.recipe_id, a.recipe_name, b.filename, a.registration_date, a.modify_date
+        from
+           recipe a, filerepository b
+        where
+           a.recipe_id = #{recipe_Id} and
+           b.recipe_id = #{recipe_Id}
+    </select>
+
+    <update id = "updateRecipe">
+        UPDATE RECIPE
+        SET
+            RECIPE_NAME = #{recipe_Name},
+            MODIFY_DATE = SYSDATE
+        WHERE
+            RECIPE_ID = #{recipe_Id}
+    </update>
+
+    <delete id = "deleteRecipe">
+        delete from
+            recipe
+        where
+            recipe_Id = #{recipe_Id}
+    </delete>
 
 </mapper>

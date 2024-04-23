@@ -68,6 +68,10 @@ var recipeService = (function() {
         });
     }
 
+
+
+
+
     // 수정
     function recipeUpdate(recipe, callback, error) {
         $.ajax({
@@ -92,7 +96,7 @@ var recipeService = (function() {
     function recipeInfoGet(recipe_Id, callback, error) {
         $.ajax({
             type : 'post',
-            url : '/recipe/rest/getPhoto",
+            url : '/recipe/rest/getPhoto',
             data : JSON.stringify(recipe_Id),
             contentType : "application/json; charset=utf-8",
             success : function(result, status, xhr) {
@@ -107,6 +111,25 @@ var recipeService = (function() {
             }
         });
     }
+
+        function recipeInfoGetForUpdate(recipe_Id, callback, error) {
+            $.ajax({
+                type : 'post',
+                url : '/recipe/rest/selectAllRecipeInfoForUpdate',
+                data : JSON.stringify(recipe_Id),
+                contentType : "application/json; charset=utf-8",
+                success : function(result, status, xhr) {
+                    if (callback) {
+                        callback(result);
+                    }
+                },
+                error : function(xhr, status, er) {
+                    if (error) {
+                        error(er);
+                    }
+                }
+            });
+        }
 
     function displayTime(timeValue) {
         var today = new Date();
@@ -139,6 +162,7 @@ var recipeService = (function() {
         recipeDelete: recipeDelete,
         recipeUpdate: recipeUpdate,
         recipeInfoGet: recipeInfoGet,
+        recipeInfoGetForUpdate : recipeInfoGetForUpdate,
         displayTime: displayTime
     };       // replyAdd function의 내용이 나옴
 })();

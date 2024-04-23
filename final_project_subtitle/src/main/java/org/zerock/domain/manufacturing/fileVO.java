@@ -12,6 +12,7 @@ public class fileVO {
         public int recipe_Id;
         public String fileName;
         public String filePath;
+        public String recipe_Name;
 }
 
 
