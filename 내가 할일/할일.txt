@@ -7,10 +7,7 @@
 
 거래 내역 나오는 페이지
 
-0=미판매 수량 -1
-1=판매중 
-2=품절 = 0
-
+창고에 자동 저장
 
 
 CREATE TABLE finishedgoodsinventory(
