@@ -20,9 +20,9 @@ public class DBConfig {
     public DataSource dataSource() {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-        hikariConfig.setJdbcUrl("jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl");
-        hikariConfig.setUsername("jsp");
-        hikariConfig.setPassword("123456");
+        hikariConfig.setJdbcUrl("jdbc:log4jdbc:oracle:thin:@1.220.247.78:1522:orcl");
+        hikariConfig.setUsername("FINAL2404_PROJECT1");
+        hikariConfig.setPassword("234561");
 
         hikariConfig.setPoolName("oracle-freebo");
         hikariConfig.setMaximumPoolSize(5);
