@@ -193,14 +193,30 @@
         end_Date  = sysdate
         WHERE perform_id = #{perform_Id}
     </update>
+
     <insert id="updateFinishedGoodsQuantity">
-        insert into FINISHEDINVENTORY(seq, select
-                                            finishedgoods_id
-                                            from finishedgoods
-                                            where FINISHEDGOODS_NAME = #{recipe_Name}, #{recipe_Name}, #{output}, '입고', syadate )
-        SET
-        FINISHEDGOODS_QUANTITY = FINISHEDGOODS_QUANTITY + #{output}
-        WHERE FINISHEDGOODS_NAME = #{recipe_Name}
+        INSERT
+        INTO FINISHEDGOODSINVENTORY
+        VALUES (
+        GoodsInven_seq.nextval,
+        (SELECT FINISHEDGOODS_ID
+        FROM FINISHEDGOODS
+        WHERE RECIPE_ID = (select recipe_Id from recipe where recipe_name = #{recipe_Name})),
+        (SELECT FINISHEDGOODS_NAME
+        FROM FINISHEDGOODS
+        WHERE RECIPE_ID = (select recipe_Id from recipe where recipe_name = #{recipe_Name})),
+        #{output},
+        '입고',
+        sysdate,
+        (SELECT STORAGE_ID
+        FROM FINISHEDGOODSSTORAGE
+        <![CDATA[
+        WHERE STORAGE_CURRENT_AMOUNT<STORAGE_TOTAL_AMOUNT
+        ]]>
+            ORDER BY STORAGE_CURRENT_AMOUNT
+            FETCH NEXT 1 ROW ONLY)
+        )
+
     </insert>
 
 </mapper>
